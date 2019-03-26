@@ -1,0 +1,25 @@
+activate tf_gpu
+
+cd into /src
+
+--set to UTF-8--
+set PYTHONIOENCODING=UTF-8
+
+--encode--
+python encode.py --in-text yourtext.txt --out-npz yourtext.txt.npz
+
+
+--retrain--
+python train.py --dataset yourtext.txt.npz --sample_every=100 --save_every=500
+
+
+
+--generate samples--
+python generate_unconditional_samples.py --top_k 40 --temperature 0.9 --nsamples=1
+
+--conditional samples--
+python interactive_conditional_samples.py --top_k 40 --temperature 0.9 --nsamples=1
+
+
+
+
